@@ -1,0 +1,10 @@
+.vrepl_temp.dSYM
+.vrepl_temp.tmp.c
+.vrepl_temp.v
+a.out.tmp.c
+faker.tmp.c
+main.dSYM
+main
+
+.DS_Store
+data/.DS_Store

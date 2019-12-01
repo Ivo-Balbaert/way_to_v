@@ -1,0 +1,18 @@
+[
+  {
+    "origin": "lxqt/pavucontrol-qt",
+    "target_language": "or",
+    "category": 20000227,
+    "source": "Card callback failure",
+    "source_language": "en",
+    "target": "\u0b15\u0b3e\u0b30\u0b4d\u0b21\u0b3c \u0b15\u0b32\u0b2c\u0b4d\u0b5f\u0b3e\u0b15 \u0b05\u0b38\u0b2b\u0b33"
+  },
+  {
+    "origin": "lxqt/pavucontrol-qt",
+    "target_language": "or",
+    "category": 20000227,
+    "source": "Sink callback failure",
+    "source_language": "en",
+    "target": "\u0b38\u0b3f\u0b19\u0b4d\u0b15 \u0b15\u0b32\u0b2c\u0b4d\u0b5f\u0b3e\u0b15 \u0b05\u0b38\u0b2b\u0b33"
+  }
+]
