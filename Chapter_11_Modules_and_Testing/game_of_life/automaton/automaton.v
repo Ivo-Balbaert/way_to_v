@@ -1,18 +1,87 @@
-import time
+module automaton
+/////////////////////////////////////////////////////////////
 
-fn print_field(field []array_int) {
-	for line in field {
-		mut s := '    '
-		for j, cell in line {
-			if j == 0 || j == line.len - 1 {continue}
-			s += if cell == 1 {'@'} else { '.'} // @ is living cell, . is dead cell
-		}
-		println(s)
-	}
-	println('')
+pub struct A2D {
+pub mut:
+	maxx int
+	maxy int
+	data &int
 }
 
-pub fn gun() []array_int {
+[inline] pub fn (a &A2D) set(x, y int, newval int) {
+	unsafe {
+		mut e := &int(0)
+		e = a.data + y * a.maxx + x
+		*e = newval
+	}
+}
+
+[inline] pub fn (a &A2D) get(x, y int) int {
+	unsafe {
+		mut e := &int(0)
+		e = a.data + y * a.maxx + x
+		return *e
+	}
+}
+
+[inline] pub fn (a &A2D) clear() {
+	for y := 0; y < a.maxy; y++ {
+		for x := 0; x < a.maxx; x++ {
+			a.set(x, y, 0)
+		}
+	}
+}
+
+/////////////////////////////////////////////////////////////
+
+pub struct Automaton {
+pub mut:
+	field &A2D
+	new_field &A2D
+}
+
+fn new_automaton(f [][]int) Automaton {
+	mut maxy := f.len
+	mut maxx := 0
+	for y := 0; y < f.len; y++ {
+		if maxx < f[y].len {
+			maxx = f[y].len
+		}
+	}
+	field     := &A2D{ maxx: maxx maxy: maxy data: &int( calloc( sizeof(int) * maxy * maxx ) ) }
+	new_field := &A2D{ maxx: maxx maxy: maxy data: &int( calloc( sizeof(int) * maxy * maxx ) ) }
+	for y := 0; y < field.maxy; y++ {
+		for x := 0; x < field.maxx; x++ {
+			field.set( x, y, f[y][x] )
+		}
+	}
+	return Automaton{ field: field new_field: new_field }
+}
+
+pub fn (aa mut Automaton) update() {
+	aa.new_field.clear()
+	for y := 1; y < aa.field.maxy; y++ {
+		for x := 1; x < aa.field.maxx; x++ {
+			moore_sum := ( 0 +
+				aa.field.get(x-1,y-1) + aa.field.get(x,y-1) + aa.field.get(x+1,y-1) +	
+				aa.field.get(x-1,y  ) + 0                   + aa.field.get(x+1,y  ) +
+				aa.field.get(x-1,y+1) + aa.field.get(x,y+1) + aa.field.get(x+1,y+1)
+			)
+			cell := aa.field.get(x,y)
+			v := if cell == 1 {
+				moore_sum in [2, 3]
+			} else {
+				moore_sum == 3
+			}
+			aa.new_field.set(x, y, if v { 1 } else { 0 })
+		}
+	}
+	mut tmp := aa.field
+	aa.field = aa.new_field
+	aa.new_field = tmp
+}
+
+pub fn gun() Automaton {
 	mut field := []array_int
 	field << [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	field << [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -43,38 +112,5 @@ pub fn gun() []array_int {
 	field << [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	field << [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	field << [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	return field
-}
-
-fn main() {
-	mut field := gun()
-	print_field(field)
-	for {
-		mut new_field := []array_int
-		for i, line in field {
-			new_field << [0].repeat(line.len)
-		}
-		for i, line in field {
-			if i == 0 || i == field.len - 1 {continue}
-			for j, cell in line {
-				if j == 0 || j == line.len - 1 {continue}
-				// calculate sum of all neighbouring cells
-				moore_sum := (
-				field[i - 1] [j - 1] + field[i - 1] [j] + field[i - 1] [j + 1] +
-				field[i] [j - 1] + field[i] [j + 1] +
-				field[i + 1] [j - 1] + field[i + 1] [j] + field[i + 1] [j + 1]
-				)
-				// apply rule for living cell in next generation
-				new_field[i] [j] = if cell == 1 { // a living cell with 2 or 3 living neighbours stays alive
-					int(moore_sum in [2, 3])
-				}
-				else { // a dead cell with 3 living neighbours becomes alive
-					int(moore_sum == 3)
-				}
-			}
-		}
-		field = new_field // copy new generation over
-		print_field(field) // print new generation
-		time.sleep_ms(100)
-	}
+	return new_automaton(field)
 }
