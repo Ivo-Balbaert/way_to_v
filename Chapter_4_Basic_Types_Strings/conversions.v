@@ -2,9 +2,9 @@ fn main() {
 	a := u32(15)
 	mut b := i8(0)
 	println(a)
-	// println(b)
+	println(b) // 0
 	b = i8(a + a)
-  // println(b)  // => 30 // works on Linux and PlayGround / Windows: `i8` needs to have method `str() string` to be printable
+  println(b)  // => 30 
 
 	n := i16(34)
 	mut m := int(0)
@@ -18,6 +18,8 @@ fn main() {
 }
 /* Output:
 15
+0
+30
 16 bit int is:  34
 32 bit int is:  34
 5
