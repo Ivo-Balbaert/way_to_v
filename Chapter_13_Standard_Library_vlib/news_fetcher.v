@@ -56,15 +56,11 @@ fn main() {
 		println('failed to decode topstories.json')
 		return
 	}
-	// keep only 10 top stories:
-	if ids.len > 10 {
-		// ids = ids[:10]
-		mut tmp := [0].repeat(10)
-		for i := 0 ; i < 10 ; i++ {
-			tmp[i] = ids[i]
-		}
-		ids = tmp
-	}
+	
+  // keep only 10 top stories:
+  if ids.len > 10 {
+	  ids = ids[..10]  
+  }
 	
 	wg := sync.new_waitgroup()
 	mtx := sync.new_mutex()
