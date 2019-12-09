@@ -1,12 +1,8 @@
-/* Nov 19:
-undefined: `sqlite.connect` (in module `sqlite`)
-*/
-#flag -lsqlite3 // this line is not needed in Linux
-
 import sqlite
 
-fn main() {
+fn test_sqlite() {
 	db := sqlite.connect(':memory:')
+	db.exec("drop table if exists users")
 	db.exec("create table users (id integer primary key, name text default '');")
 	
 	db.exec("insert into users (name) values ('Sam')")
@@ -20,14 +16,8 @@ fn main() {
 	assert name == 'Sam'
 	
 	users := db.exec('select * from users')
+	assert users.len == 3
 	for row in users {
 		println(row.vals)
 	}	
 }	
-
-/* Output: Linux
-nr users = 3
-["1", "Sam"]
-["2", "Peter"]
-["3", "Kate"]
-*/
