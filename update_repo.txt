@@ -1,5 +1,5 @@
 git add .
-git commit -m "latest additions benchmarking, ..."
+git commit -m "sqlite examples work on Windows and Linux"
 git push -u origin master
 
 Remote repo is:  https://github.com/Ivo-Balbaert/way_to_v
