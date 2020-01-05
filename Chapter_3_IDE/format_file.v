@@ -1,3 +1,3 @@
-fn main() {
-	 println("I have been formatted?")
-}
+fn main() 
+{
+	 println(  "I have been formatted?") } 

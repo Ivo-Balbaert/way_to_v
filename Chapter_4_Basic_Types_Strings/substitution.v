@@ -2,6 +2,10 @@ const (
 	lower_s  = 'lower s'
 )
 
+fn get_val() int {
+  return 13
+}
+
 fn main() {
 	person := 'Harris' 
 	println('Hello, $person!')
@@ -17,7 +21,10 @@ fn main() {
    
   a := 5
   b := 7
-	println('The sum is ${a + b}') 
+	println('The sum is ${a + b}')
+
+  // Interpolated strings now allow function calls: 
+  println('val = $get_val()')
 }
 /* Output:
 Hello, Harris!
@@ -26,4 +33,5 @@ lower_s = lower s
 pi with 2 decimals is 3.14
 is_sharp is 1
 The sum is 12
+val = 13
 */

@@ -1,3 +1,7 @@
+// Copyright (c) 2019 Alexander Medvednikov. All rights reserved.
+// Use of this source code is governed by an MIT license
+// that can be found in the LICENSE file.
+
 module main
 
 import rand
@@ -73,13 +77,13 @@ const (
 	// Each tetro has its unique color
 	Colors = [
 		gx.rgb(0, 0, 0),        // unused ?
-		gx.rgb(253, 32, 47),    // lightred quad
-		gx.rgb(0, 110, 194),    // lightblue triple
-		gx.rgb(170, 170, 0),    // darkyellow short topright
-		gx.rgb(170, 0, 170),    // purple short topleft
-		gx.rgb(50, 90, 110),    // darkgrey long topleft
-		gx.rgb(0, 170, 0),      // lightgreen long topright
-		gx.rgb(170, 85, 0),     // brown longest
+		gx.rgb(255, 242, 0),    // yellow quad
+		gx.rgb(174, 0, 255),    // purple triple
+		gx.rgb(60, 255, 0),     // green short topright
+		gx.rgb(255, 0, 0),      // red short topleft
+		gx.rgb(255, 180, 31),   // orange long topleft
+		gx.rgb(33, 66, 255),    // blue long topright
+		gx.rgb(74, 198, 255),   // lightblue longest
 		gx.rgb(0, 170, 170),    // unused ?
 	]
 
@@ -124,7 +128,7 @@ struct Game {
 	// gg context for drawing
 	gg          &gg.GG
 	// ft context for font drawing
-	ft          &freetype.Context
+	ft          &freetype.FreeType
 	font_loaded bool
 }
 
@@ -148,11 +152,12 @@ fn main() {
 	gg.clear(BackgroundColor)
 	// Try to load font
 	game.ft = freetype.new_context(gg.Cfg{
-			width: WinWidth
-			height: WinHeight
-			use_ortho: true
-			font_size: 18
-			scale: 2
+		width: WinWidth
+		height: WinHeight
+		use_ortho: true
+		font_size: 18
+		scale: 2
+		window_user_ptr: 0
 	})
 	game.font_loaded = (game.ft != 0 )
 	for {
@@ -285,7 +290,7 @@ fn (g mut Game) generate_tetro() {
 // Get the right tetro from cache
 fn (g mut Game) get_tetro() {
 	idx := g.tetro_idx * TetroSize * TetroSize + g.rotation_idx * TetroSize
-	g.tetro = g.tetros_cache.slice(idx, idx + TetroSize)
+	g.tetro = g.tetros_cache[idx..idx+TetroSize]
 }
 
 // TODO mut
@@ -357,7 +362,7 @@ fn parse_binary_tetro(t_ int) []Block {
 	for i := 0; i <= 3; i++ {
 		// Get ith digit of t
 		p := int(math.pow(10, 3 - i))
-		mut digit := int(t / p)
+		mut digit := t / p
 		t %= p
 		// Convert the digit to binary
 		for j := 3; j >= 0; j-- {
@@ -398,8 +403,9 @@ fn key_down(wnd voidptr, key, code, action, mods int) {
 				game.state = .running
 			}
 		}
+		else {}
 	}
-	
+
 	if game.state != .running {
 		return
 	}
@@ -430,5 +436,6 @@ fn key_down(wnd voidptr, key, code, action, mods int) {
 	glfw.KeyDown {
 		game.move_tetro() // drop faster when the player presses <down>
 	}
+	else { }
 	}
 }

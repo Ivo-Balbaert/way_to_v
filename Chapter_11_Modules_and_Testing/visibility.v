@@ -1,6 +1,3 @@
-// Nov 16: Windows
-// structs can only have one `pub:`, all public fields have to be grouped
-// structs can only have one `mut:`, all private mutable fields have to be grouped ??
 struct User {
     email string
 mut:
@@ -18,3 +15,5 @@ __global:       // this is mutable in- and out, and public
     country string
     zip     string
 }
+
+fn main() {}

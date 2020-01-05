@@ -1,0 +1,7 @@
+ivo@ivo-SATELLITE-L50D-B:~/blog_orm$ v run .
+sql query="select id, title, text from Articles"
+/tmp/v/blog_orm.tmp.c: In function ‘pg__connect’:
+/tmp/v/blog_orm.tmp.c:3960:18: warning: pointer targets in initialization of ‘byte *’ {aka ‘unsigned char *’} from ‘char *’ differ in signedness [-Wpo...
+(Use `v -g` to print the entire error message)
+
+V error: C error. This should never happen. 

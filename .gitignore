@@ -1,0 +1,12 @@
+*.exe
+*.o
+*.obj
+*.vrepl_temp.v
+*.tmp.c
+a.out.tmp.c
+*.vrepl.v
+*.vrepl*
+.vrepl_temp
+
+.DS_Store
+data/.DS_Store

@@ -52,6 +52,7 @@ fn main() {
 		println('failed to fetch data from /v0/topstories.json')
 		return
 	}
+	// resp := http.get('https://hacker-news.firebaseio.com/v0/topstories.json')?
 	mut ids := json.decode([]int, resp.text) or {
 		println('failed to decode topstories.json')
 		return

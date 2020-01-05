@@ -22,17 +22,16 @@ pub fn (app mut App) init() {
 	app.vweb.handle_static('.')
 }
 
-pub fn (app & App) json_endpoint() {
+pub fn (app mut App) json_endpoint() {
 	app.vweb.json('{"a": 3}')
 }
 
 pub fn (app mut App) index() {
-	app.cnt ++
-	
+	app.cnt++
 	$vweb.html()
 }
 
-pub fn (app & App) text() {
+pub fn (app mut App) text() {
 	app.vweb.text('Hello world')
 }
 
