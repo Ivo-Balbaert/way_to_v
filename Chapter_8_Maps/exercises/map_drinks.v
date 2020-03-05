@@ -1,9 +1,9 @@
 fn main() {
-	mut drinks := {
-				'beer': 'bière',
-				'wine': 'vin',
-				'water': 'eau',
-				'coffee': 'café',
+	drinks := {
+				'beer': 'bière'
+				'wine': 'vin'
+				'water': 'eau'
+				'coffee': 'café'
 				'thea': 'thé'
 	}
 				

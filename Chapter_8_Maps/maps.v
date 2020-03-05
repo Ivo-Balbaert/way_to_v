@@ -1,10 +1,10 @@
 fn main() {
 // Literal maps:
   numbers := { 
-    'one': 1, 
+    'one': 1 
     'two': 2 
   }
-  m1 := { 'foo': 'bar', 'baz': 'bar' }
+  m1 := { 'foo': 'bar', 'baz': 'bar' } // , can be left out !
   println(m1['baz']) // => bar
   m10 := {'ford' : 'mustang', 'chevrolet' : 'camaro', 'dodge' : 'challenger'}
     

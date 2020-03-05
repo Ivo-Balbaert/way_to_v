@@ -16,7 +16,7 @@ fn new_repo() Repo {
         }
 } 
 
-fn (r Repo) str() string {
+pub fn (r Repo) str() string {
         mut str := ''
         for u in r.users {
                 str += '$u.id : $u.name / $u.age\n'

@@ -65,12 +65,13 @@ fn main() {
 				field[i + 1] [j - 1] + field[i + 1] [j] + field[i + 1] [j + 1]
 				)
 				// apply rule for living cell in next generation
-				new_field[i] [j] = if cell == 1 { // a living cell with 2 or 3 living neighbours stays alive
-					int(moore_sum in [2, 3])
+				v := if cell == 1 { // a living cell with 2 or 3 living neighbours stays alive
+					(moore_sum in [2, 3])
 				}
 				else { // a dead cell with 3 living neighbours becomes alive
-					int(moore_sum == 3)
+					(moore_sum == 3)
 				}
+				new_field[i] [j] = if v { 1 } else { 0 }
 			}
 		}
 		field = new_field // copy new generation over
