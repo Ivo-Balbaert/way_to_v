@@ -9,6 +9,10 @@ fn char_example() {
     // use += to append to a string
     concat += '_appended'
     println(', $concat') // => , badnews bears_appended
+
+    // raw string: 
+    raw_hello := r'Hello\nWorld'
+    println(raw_hello) // => Hello\nWorld
 }
 
 char_example()
