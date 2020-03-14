@@ -26,6 +26,13 @@ fn main() {
 	x3 := 'Flower'
 	println (x3[0..4]) // => Flow
 	
+	robert := 'Robert'
+	bert := robert[2..robert.len]                                 // bert
+	// rob := robert[0..3]                                           // Rob
+	rob := robert[..3]                                           // Rob
+	println('The persons of interest are: $robert, $bert, $rob')  
+	// => The persons of interest are: Robert, bert, Rob
+
 	// Split a string:
 	p := 'There are many words in a sentence'
 	arr := p.split(' ') // split by space
@@ -51,8 +58,8 @@ fn main() {
 	x = x.replace('two', 'three') 
 	println(x)  // => There are three monkeys in the tree
 	// if a match is not found, it doesn't do anything, no error:
-	y := 'There are mony birds in the tree'
-	println(y.replace('many', 'two')) // => There are mony birds in the tree
+	y := 'There are many birds in the tree'
+	println(y.replace('mony', 'two')) // => There are many birds in the tree
 
 	// Finding text between two characters:
 	a := 'This is so [Crazy]'

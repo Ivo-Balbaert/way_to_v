@@ -13,10 +13,10 @@ mut:
 
 fn nonnil_or_stay(old_place &Place, new_place &Place) &Place {
     if isnil(new_place) {
-        println("Nothing is there.")
-        return old_place
+       println("Nothing is there.")
+       return old_place
     } else {
-        return new_place
+       return new_place
     }
 }
 
@@ -58,22 +58,22 @@ fn main() {
     shrub.right = &bear
     bear.previous = &shrub
 
-    // println(&tree)
-    // println(tree)
+    println(&tree)
+    println(tree)
 
-    // println(&pile)
-    // println(pile)
+    println(&pile)
+    println(pile)
 
-    // println(&shrub)
-    // println(shrub)
+    println(&shrub)
+    println(shrub)
 
-    // println(&bear)
-    // println(bear)
+    println(&bear)
+    println(bear)
 
 		traveler := Traveler{location: &tree}
 		println(traveler.location.name) // Tree
 
-		move(mut traveler, "back")
+	move(mut traveler, "back")
     move(mut traveler, "left")
     move(mut traveler, "back")
     move(mut traveler, "right")

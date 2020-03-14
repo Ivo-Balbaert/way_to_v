@@ -28,7 +28,7 @@ fn parse_mode(args []string) Mode {
 fn count(mode Mode, path string) int {
     mut result := 0
 
-    if !os.file_exists(path) {
+    if !os.exists(path) {
         result = -1
         return result
     }
@@ -44,23 +44,22 @@ fn count(mode Mode, path string) int {
 
 
 fn main() {
-		if os.args.len < 3 { 
-			println('Usage word_counter_book -mode file1 file2')
-			return
-		}
+	// if os.args.len < 3 { 
+	// 		println('Usage word_counter_book -mode file1 file2')
+	// 		return
+	// 	}
+    // counting one file:
     mode := parse_mode(os.args)
+    file := os.args[2]
+    println(count(mode, file))
 
-		// counting one file:
-    // file := os.args[2]
-    // println(count(mode, file))
-
-		// counting multiple files:
-		for i := 2; i < os.args.len; i++ {
-			file := os.args[i]
-			print('File $file contains ')
-    	print(count(mode, file))
-			println(' $mode.name')	
-		}
+	// counting multiple files:
+	// for i := 2; i < os.args.len; i++ {
+	// 	file := os.args[i]
+	// 	print('File $file contains ')
+    // 	print(count(mode, file))
+	// 	println(' $mode.name')	
+	// }
 }
 
 /* Output:

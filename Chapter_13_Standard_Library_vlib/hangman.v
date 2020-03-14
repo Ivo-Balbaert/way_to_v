@@ -1,3 +1,12 @@
+// works in Powershell
+// on normal Windows cmd:
+/* Attempt 1
+Word: [ ---- ]
+Attempt 2
+Word: [ ---- ]
+*/
+// After that it works ?
+
 import (
     os
     rand
@@ -34,9 +43,11 @@ fn guess(input string, word string, mask string) string {
     return new_mask
 }
 
+
 fn check_win(word string, mask string) bool {
     return word == mask
 }
+
 
 fn check_continue(word string, mask string, attempts int) bool {
     return !check_win(word, mask) && attempts < max_attempts
@@ -56,8 +67,7 @@ fn load_word(path string) string {
         println('Word file not found!')
         return ''
     }
-    t := time.now()
-    rand.seed(t.calc_unix())
+    rand.seed(time.now().uni)
     return lines[rand.next(lines.len)]
 }
 

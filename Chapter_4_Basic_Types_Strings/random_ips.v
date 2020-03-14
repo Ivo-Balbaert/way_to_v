@@ -4,7 +4,7 @@ import (
 )
 
 fn main() {
-	rand.seed(time.now().uni)
+	rand.seed(time.now().calc_unix()) // voorlopig opsplitsen
 
 	for _ in 0..10 {
 		println('${rand.next(255)}.${rand.next(255)}.${rand.next(255)}.${rand.next(255)}')
