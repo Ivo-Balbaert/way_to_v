@@ -3,4 +3,6 @@ const (
 	const2 = 108
 )
 
-println(greeting) // Hello, World from V!
+// fn main() {
+	println(greeting) // Hello, World from V!
+// }

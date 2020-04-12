@@ -51,15 +51,15 @@ fn main() {
 	queue.enqueue(4.2)
 	println('Queue is empty? ' + if queue.empty() { 'Yes' } else { 'No' })
 	queue.peek() or {
-		print('error')
+		eprintln('error: $err')
 		return
 	}
 	queue.dequeue() or {
-		print('error')
+		eprintln('error: $err')
 		return
 	}
 	queue.dequeue() or {
-		print('error')
+		eprintln('error: $err')
 		return
 	}
 	queue.enqueue(1.2)

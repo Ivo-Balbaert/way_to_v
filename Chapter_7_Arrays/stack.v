@@ -50,15 +50,15 @@ fn main() {
 	stack.push(4.2)
 	println('Stack is empty? ' + if stack.empty() { 'Yes' } else { 'No' })
 	stack.peek() or {
-		print('error')
+		eprintln('error: $err')
 		return
 	}
 	stack.pop() or {
-		print('error')
+		eprintln('error: $err')
 		return
 	}
 	stack.pop() or {
-		print('error')
+		eprintln('error: $err')
 		return
 	}
 }
