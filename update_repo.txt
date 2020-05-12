@@ -3,3 +3,7 @@ git commit -m "rosetta"
 git push -u origin master
 
 Remote repo is:  https://github.com/Ivo-Balbaert/way_to_v
+
+
+(forced update: git push https://github.com/Ivo-Balbaert/NimbleExample -f
+see: https://stackoverflow.com/questions/5509543/how-do-i-properly-force-a-git-push)
