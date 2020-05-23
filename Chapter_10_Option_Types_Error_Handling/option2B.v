@@ -25,7 +25,7 @@ fn (r Repo) find_user_by_id(id int) ?User {
 
 fn main() {
 	repo := new_repo() 
-	user := repo.find_user_by_id(10) or { 
+	user := repo.find_user_by_id(11) or { 
 		println(err) 
 		return    
 	} 
